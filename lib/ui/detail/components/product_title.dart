@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skl_ecommerce_2/consts.dart';
-import 'package:skl_ecommerce_2/models/product.dart';
+import 'package:skl_ecommerce_2/models/products.dart';
+import 'package:skl_ecommerce_2/state-management/theme_provider.dart';
 
 class ProductTitle extends StatelessWidget {
   const ProductTitle({super.key, required this.product});
@@ -8,6 +10,7 @@ class ProductTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final Size size = MediaQuery.of(context).size;
 
     // definisikan ukuran proposional gambar sebagai variable const
@@ -18,14 +21,14 @@ class ProductTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the start
         children: [
-          const Text(
+           Text(
             "High Value Parfume", // Static title
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.white),
           ),
           Text(
             product.title, // Dynamic product title
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -37,14 +40,14 @@ class ProductTitle extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Price",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.white),
                     ),
                     Text(
                       "${product.price}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),

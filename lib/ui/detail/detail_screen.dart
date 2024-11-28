@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skl_ecommerce_2/consts.dart';
-import 'package:skl_ecommerce_2/models/product.dart';
+import 'package:skl_ecommerce_2/models/products.dart';
+import 'package:skl_ecommerce_2/state-management/theme_provider.dart';
 import 'package:skl_ecommerce_2/ui/detail/components/add_to_cart.dart';
 import 'package:skl_ecommerce_2/ui/detail/components/card_counter.dart';
 import 'package:skl_ecommerce_2/ui/detail/components/color_and_size.dart';
@@ -15,21 +17,34 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    int quantity = 1;
   // the way that used for making the widget become responsive, as the device size
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: product.color,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          }, 
+        icon: Icon(Icons.arrow_back_ios, color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.black)
+        ),
         backgroundColor: product.color,
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, "/wishlist");
+            },
+            icon: Icon(Icons.favorite_border_outlined, color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.black),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              Navigator.pushNamed(context, "/cart");
+            },
+            icon: Icon(Icons.shopping_cart_outlined, color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.black),
           ),
         ],
       ),
@@ -49,9 +64,9 @@ class DetailScreen extends StatelessWidget {
                       left: defaultPadding,
                       right: defaultPadding,
                     ),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      color: themeProvider.isDarkTheme ? Colors.grey[900] : Colors.white,
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(24),
                         topRight: Radius.circular(24),
                       ),
@@ -64,15 +79,15 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultPadding),
                         Description(product: product),
                         const SizedBox(height: defaultPadding),
-                        const Row(
+                           Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CartCounter(),
-                            FavButton()
+                            CardCounter(product: product),
+                            FavButton(product: product)
                           ],
                         ),
                         const SizedBox(height: defaultPadding),
-                        AddToCart(product: product),
+                        AddToCart(product: product, quantity: quantity),
                       ],
                     ),
                   ),

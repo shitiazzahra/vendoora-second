@@ -11,8 +11,11 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   int currentPage = 0;
+  // untuk view pager ada di cataloge screen
   PageController _pageController = PageController();
 
+  // ini dasar ambil data dari API
+  // karena pake format key value
   List<Map<String, String>> splashData = [ 
     {
       "text": "Find luxury fragrances from iconic and \nexclusive brands, find your signature.",
@@ -55,6 +58,7 @@ class _BodyState extends State<Body> {
                         )
                       ),
                    ),
+            // flexible dan responsive dan memanfaatkan roang kosong yg ada
             Expanded(
                 child:
                 Row(
@@ -84,7 +88,6 @@ class _BodyState extends State<Body> {
                         currentPage + 1,
                         duration: animationDuration,
                         curve: Curves.ease);
-                      
                     }
                   }, 
                   // ini untuk  text button

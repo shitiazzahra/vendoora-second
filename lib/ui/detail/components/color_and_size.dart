@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skl_ecommerce_2/consts.dart';
-import 'package:skl_ecommerce_2/models/product.dart';
+import 'package:skl_ecommerce_2/models/products.dart';
+import 'package:skl_ecommerce_2/state-management/theme_provider.dart';
 
 class ColorAndSize extends StatelessWidget {
   const ColorAndSize({super.key, required this.product});
@@ -9,26 +11,29 @@ class ColorAndSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Row(
       children: [
         // expended mengisi kekosongan yg ada
-          const Expanded(
+           Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Color"),
-              Row(
+              Text("Scent Intensity", 
+              style: TextStyle(color: themeProvider.isDarkTheme ? Colors.white : Colors.black),
+              ),
+              const Row(
                 children: [
                   ColorPicker(
-                    color: Color(0xFF3D82AE),
+                    color: Color(0xFF6FBF4D),
                     isSelected: true,
                     ),
                   ColorPicker(
-                    color: Color(0xFFE6B398),
+                    color: Color(0xFF989493),
                     isSelected: false,
                     ),
                   ColorPicker(
-                    color: Color(0xFF989493),
+                    color: Color(0xFFBF4D4F),
                     isSelected: false,
                     )
                 ],
@@ -36,6 +41,7 @@ class ColorAndSize extends StatelessWidget {
             ],
           )
         ),
+        
         Expanded(
           // tujuan nya sama' buat styling dan modified text:
           // -text: superclass
@@ -45,16 +51,17 @@ class ColorAndSize extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Size",
-                style: TextStyle(color: textColor),
+                style: TextStyle(color: themeProvider.isDarkTheme ? Colors.white : textColor),
                 ),
+                const SizedBox(height: 14),
               RichText( //RichText untuk text yang punya tema terang dan gelap
                 text: TextSpan(
-                  style: const TextStyle(color: textColor),
+                  style: TextStyle(color: themeProvider.isDarkTheme ? Colors.white : textColor),
                   children: [
                     TextSpan(
-                      text: "${product.size} cm",
+                      text: "${product.size} ml",
                       style: Theme.of(context)
                       .textTheme
                       .titleLarge!

@@ -31,7 +31,7 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     return Padding( 
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
-      child: SizedBox(//sizedbox untuk nambahin dia ada jaraknya antara viewpager dan widget nya
+      child: SizedBox(
         height: 25,
         //listview dibuat untuk ngeslide horizontal, utk create a scrollable linear array horizontal
         
@@ -45,17 +45,22 @@ class _CategoriesState extends State<Categories> {
     ); 
   }
 
+  //gesture detector itu kayak buat deteksi pergerakan menggunakan pen, tapi bisa juga tidak menggunakan pen/ jadi pakai tangan
+  //Boiler Plate Code itu kalo itu udh di defind, trus kita defind ulang, jadi numpuk2
+  // index itu buat data array
+
+  //buat index nya itu menjadi zero,di default in index nya jadi 0 dibagian sebelm override
+
+  // kalo to many positional argument berarti coba tambahin child, pokoknya hrrq nya salah
+  
   GestureDetector _buildCategory(int index) {
-    return GestureDetector( //gesture detector itu kayak buat deteksi pergerakan menggunakan pen, tapi bisa juga tidak menggunakan pen/ jadi pakai tangan
-      //Boiler Plate Code itu kalo itu udh di defind, trus kita defind ulang, jadi numpuk2
-      // index itu buat data array
+    return GestureDetector(
       onTap: () {
         setState(() {
-          selectedIndex = index; //buat index nya itu menjadi zero,di default in index nya jadi 0 dibagian sebelm override
+          selectedIndex = index; 
         }
         );
       },
-      // kalo to many positional argument berarti coba tambahin child, pokoknya hrrq nya salah
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
         child: Column(

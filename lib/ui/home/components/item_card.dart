@@ -2,7 +2,7 @@
 //menjadikan semua object reusable
 
 import 'package:skl_ecommerce_2/consts.dart';
-import 'package:skl_ecommerce_2/models/product.dart';
+import 'package:skl_ecommerce_2/models/products.dart';
 import 'package:flutter/material.dart';
 
 class ItemsCard extends StatelessWidget {
@@ -45,7 +45,8 @@ class ItemsCard extends StatelessWidget {
             ),
 
           Text(
-            "Rp ${product.price}"
+            "\$ ${product.price}",
+            style: const TextStyle(fontWeight: FontWeight.bold),
           )
         ],
       ),

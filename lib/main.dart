@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skl_ecommerce_2/consts.dart';
+import 'package:skl_ecommerce_2/state-management/cart_provider.dart';
 import 'package:skl_ecommerce_2/state-management/theme_provider.dart';
+import 'package:skl_ecommerce_2/state-management/wishlist_provider.dart';
 import 'package:skl_ecommerce_2/ui/auth/login_screen.dart';
 import 'package:skl_ecommerce_2/ui/auth/register_screen.dart';
-import 'package:skl_ecommerce_2/ui/home/calatogue_screen.dart';
+import 'package:skl_ecommerce_2/ui/cart/cart_screen.dart';
+import 'package:skl_ecommerce_2/ui/home/catalogue_screen.dart';
 import 'package:skl_ecommerce_2/ui/settings/settings_screen.dart';
 import 'package:skl_ecommerce_2/ui/splash/splash_screen.dart';
-import 'package:skl_ecommerce_2/ui/wishlist/wishlist.dart';
+import 'package:skl_ecommerce_2/ui/wishlist/wishlist_screen.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    // placeholder untuk tamplate provider yg belum terdefinisi
-      create: (_) => ThemeProvider(),
+  runApp(
+    // MultiProvider dipake kalau punya banyak provider
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
+      ],
       child: const FloShop()
     )
   );
@@ -55,9 +63,10 @@ class _FloShopState extends State<FloShop> {
             '/' : (context) => const SplashScreen(),
             '/login' : (context) => LoginPage(),
             '/register' : (context) => RegisterPage(),
-            '/wishlist' : (context) => WishlistScreen(),
+            '/wishlist' : (context) => const WishlistScreen(),
             '/cataloge' : (context) => const CatalogueScreen(),
             '/settings' : (context) => const SettingsScreen(),
+            '/cart' : (context) => const CartScreen(),
             },
           );
            },
